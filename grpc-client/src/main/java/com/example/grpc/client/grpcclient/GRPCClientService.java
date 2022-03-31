@@ -122,17 +122,17 @@ public class GRPCClientService {
 		ArrayList<MatrixServiceBlockingStub> stubs = new ArrayList<MatrixServiceBlockingStub>();
 
 		String[] servers = new String[8];
-		servers[0] = "localhost";
-		servers[1] = "localhost";
-		servers[2] = "localhost";
-		servers[3] = "localhost";
-		servers[4] = "localhost";
-		servers[5] = "localhost";
-		servers[6] = "localhost";
-		servers[7] = "localhost";
+		servers[0] = "35.193.176.169";
+		servers[1] = "35.238.216.145";
+		servers[2] = "35.226.239.150";
+		servers[3] = "104.198.177.137";
+		servers[4] = "35.193.43.162";
+		servers[5] = "35.225.106.23";
+		servers[6] = "34.66.199.246";
+		servers[7] = "34.72.175.75";
 
 		for (int i = 0; i < servers.length; i++) {
-			channels[i] = ManagedChannelBuilder.forAddress(servers[i], 9090).usePlaintext().build();
+			channels[i] = ManagedChannelBuilder.forAddress(servers[i], 8082).usePlaintext().build();
 			stubs.add(MatrixServiceGrpc.newBlockingStub(channels[i]));
 		}
 		return stubs;
