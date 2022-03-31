@@ -51,14 +51,45 @@ public class GRPCClientService {
 				for (int k = 0; k < A.length; k++) {
 					Matrix A1 = A[i][k];
 					Matrix A2 = B[k][j];
-					if (i==0 && j==0 && k==0) {
-						serversNeeded = getDeadline(A1, A2, blocks, deadline, (blockA.size()*blockA.size()), stubs.get(0));
+					if (i == 0 && j == 0 && k == 0) {
+						serversNeeded = getDeadline(A1, A2, blocks, deadline, (blockA.size() * blockA.size()), stubs.get(0));
 						continue;
 					}
-					MatrixResponse C = stubs.get(currentServer).multiply
+					MatrixResponse C = stubs.get(currentServer).multiply(requestFromBlock(A1, A2));
+					currentServer++;
+					if (currentServer == serversNeeded) {
+						currentServer = 0;
+					}
+					blocks.add(C);
 				}
 			}
 		}
+		// here we add the blocks from the multiplication, starting with the block
+		// from server 0
+		currentServer = 0;
+		ArrayList<MatrixRespone> addBlocks = new ArrayList<>();
+		MatrixResponse lastResponse = null;
+		int rows = A.length * 2;
+		int rowLength = A.length;
+		int index = 1;
+		for (int i = 0; i < blocks.size(); i += rowLength) {
+			for (int j = i; j < rowLength * index; j += 2) {
+				if (j == i) {
+					lastResponse = stubs.get(currentServer).add(requestFromBlockAddMatrix(blocks.get(j), blocks.get(j + 1)));
+				} else {
+					lastResponse = stubs.get(currentServer).add(requestFromBlockAddMatrix(lastResponse, blocks.get(j)));
+					j -= 1;
+				}
+			}
+			addBlocks.add(lastResponse);
+			index += 1;
+			currentServer += 1;
+			// once we reach the last server, we start from server 0 again
+			if (currentServer == serversNeeded) {
+				currentServer = 0;
+			}
+		}
+		return addBlocks;
 	}
 
 	private static int[][] assembleMatrix(ArrayList<MatrixResponse> blocks, int rows, int columns) {
