@@ -1,4 +1,4 @@
-package com.example.uploadingfiles.storage;
+package com.example.grpc.client.grpcclient.storage;
 
 public class StorageException extends RuntimeException {
 

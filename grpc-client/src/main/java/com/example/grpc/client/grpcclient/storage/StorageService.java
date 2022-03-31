@@ -1,4 +1,4 @@
-package com.example.uploadingfiles.storage;
+package com.example.grpc.client.grpcclient.storage;
 
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;

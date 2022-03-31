@@ -1,15 +1,36 @@
 <html xmlns:th="https://www.thymeleaf.org">
+
 <body>
 
 	<div th:if="${message}">
-		<h2 th:text="${message}"/>
+		<h2 th:text="${message}" />
 	</div>
 
 	<div>
 		<form method="POST" enctype="multipart/form-data" action="/">
 			<table>
-				<tr><td>File to upload:</td><td><input type="file" name="file" /></td></tr>
-				<tr><td></td><td><input type="submit" value="Upload" /></td></tr>
+				<tr>
+					<td>File to upload:</td>
+					<td><input type="file" name="file" /></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="submit" value="Upload" /></td>
+				</tr>
+				<tr>
+					<td>Simple Multiplication</td>
+					<td><input type="submit" name="simpleMult" value="simple" /> </td>
+				</tr>
+				<tr>
+					<td>Multiplication with Deadline</td>
+					<td><input type="submit" name="deadlineMult" value="deadline" /> </td>
+				</tr>
+
+
+				<tr>
+					<td>Deadline (number)</td>
+					<td><input type="number" placeholder="Deadline in seconds" name="deadlineInput" /></td>
+				</tr>
 			</table>
 		</form>
 	</div>
@@ -23,4 +44,5 @@
 	</div>
 
 </body>
+
 </html>
