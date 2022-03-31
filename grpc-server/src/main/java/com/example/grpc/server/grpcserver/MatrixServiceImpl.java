@@ -2,10 +2,6 @@ package com.example.grpc.server.grpcserver;
 
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
-import com.example.grpc.client.grpcclient.MatrixRequest;
-import com.example.grpc.client.grpcclient.MatrixResponse;
-import com.example.grpc.client.grpcclient.Matrix;
-import com.example.grpc.client.grpcclient.MatrixServiceGrpc.MatrixServiceImplBase;
 
 @GrpcService
 public class MatrixServiceImpl extends MatrixServiceGrpc.MatrixServiceImplBase {

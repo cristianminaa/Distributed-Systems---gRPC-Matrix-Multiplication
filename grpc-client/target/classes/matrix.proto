@@ -15,20 +15,17 @@ syntax = "proto3";
 
 option java_multiple_files = true;
 option java_package = "com.example.grpc.server.grpcserver";
-option java_outer_classname = "MatrixMult";
-option objc_class_prefix = "MM";
 
-package matrixmult;
+package matrixlibrary;
 
-// The matrix service definition.
 service MatrixService{
   rpc multiplyBlock (MatrixRequest) returns (MatrixResponse) {}
   rpc addBlock (MatrixRequest) returns (MatrixResponse) {}
 }
 
 message MatrixRequest {
-  int32 A = 1;
-  int32 B = 2;
+  Matrix A = 1;
+  Matrix B = 2;
 }
 
 message Matrix {
