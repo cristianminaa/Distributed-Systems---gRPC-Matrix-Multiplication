@@ -1,18 +1,15 @@
 package com.example.grpc.client.grpcclient;
 
-import com.example.grpc.server.grpcserver.PingRequest;
-import com.example.grpc.server.grpcserver.PongResponse;
-import com.example.grpc.server.grpcserver.PingPongServiceGrpc;
-import com.example.grpc.server.grpcserver.MatrixRequest;
-
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.example.grpc.server.grpcserver.Matrix;
-import com.example.grpc.server.grpcserver.MatrixServiceGrpc;
-import com.example.grpc.server.grpcserver.MatrixServiceGrpc.MatrixServiceBlockingStub;
+import com.example.grpc.client.grpcclient.proto.MatrixRequest;
+import com.example.grpc.client.grpcclient.proto.Matrix;
+import com.example.grpc.client.grpcclient.proto.MatrixResponse;
+import com.example.grpc.client.grpcclient.proto.MatrixServiceGrpc;
+import com.example.grpc.client.grpcclient.proto.MatrixServiceGrpc.MatrixServiceBlockingStub;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import net.devh.boot.grpc.client.inject.GrpcClient;
