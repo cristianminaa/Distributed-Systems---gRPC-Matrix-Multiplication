@@ -49,10 +49,10 @@ public class GRPCClientService {
 					Matrix A1 = A[i][k];
 					Matrix A2 = B[k][j];
 					if (i == 0 && j == 0 && k == 0) {
-						serversNeeded = getDeadline(A1, A2, blocks, deadline, (blockA.size() * blockA.size()), stubs.get(0));
+						serversNeeded = getDeadline(A1, A2, stubs.get(0), (blockA.size() * blockA.size()), deadline);
 						continue;
 					}
-					MatrixResponse C = stubs.get(currentServer).multiply(requestFromBlock(A1, A2));
+					MatrixResponse C = stubs.get(currentServer).multiplyMatrix(requestFromBlock(A1, A2));
 					currentServer++;
 					if (currentServer == serversNeeded) {
 						currentServer = 0;
@@ -64,7 +64,7 @@ public class GRPCClientService {
 		// here we add the blocks from the multiplication, starting with the block
 		// from server 0
 		currentServer = 0;
-		ArrayList<MatrixRespone> addBlocks = new ArrayList<>();
+		ArrayList<MatrixResponse> addBlocks = new ArrayList<>();
 		MatrixResponse lastResponse = null;
 		int rows = A.length * 2;
 		int rowLength = A.length;
@@ -72,9 +72,10 @@ public class GRPCClientService {
 		for (int i = 0; i < blocks.size(); i += rowLength) {
 			for (int j = i; j < rowLength * index; j += 2) {
 				if (j == i) {
-					lastResponse = stubs.get(currentServer).add(requestFromBlockAddMatrix(blocks.get(j), blocks.get(j + 1)));
+					lastResponse = stubs.get(currentServer)
+							.addBlocks(requestFromBlockAddMatrix(blocks.get(j), blocks.get(j + 1)));
 				} else {
-					lastResponse = stubs.get(currentServer).add(requestFromBlockAddMatrix(lastResponse, blocks.get(j)));
+					lastResponse = stubs.get(currentServer).addBlocks(requestFromBlockAddMatrix(lastResponse, blocks.get(j)));
 					j -= 1;
 				}
 			}
@@ -94,10 +95,10 @@ public class GRPCClientService {
 		int block = 0;
 		for (int i = 0; i < rows; i += 2) {
 			for (int j = 0; j < columns; j += 2) {
-				matrix[i][j] = blocks.get(block).getC().getA1();
-				matrix[i][j + 1] = blocks.get(block).getC().getB1();
-				matrix[i + 1][j] = blocks.get(block).getC().getC1();
-				matrix[i + 1][j + 1] = blocks.get(block).getC().getD1();
+				matrix[i][j] = blocks.get(block).getC().getC00();
+				matrix[i][j + 1] = blocks.get(block).getC().getC01();
+				matrix[i + 1][j] = blocks.get(block).getC().getC10();
+				matrix[i + 1][j + 1] = blocks.get(block).getC().getC11();
 				block++;
 			}
 		}
@@ -213,7 +214,7 @@ public class GRPCClientService {
 	static double getDeadline(Matrix A1, Matrix A2, MatrixServiceBlockingStub stub, int numberOfBlocks, double deadline) {
 		int deadlineMilis = deadline * 1000;
 		double startTime = System.currentTimeMillis();
-		MatrixReply temp = stub.multiplyBlock(MatrixRequest.newBuilder().setA(A1).setB(A2).build());
+		MatrixResponse temp = stub.multiplyMatrix(MatrixRequest.newBuilder().setA(A1).setB(A2).build());
 		double endTime = System.currentTimeMillis();
 		double footprint = endTime - startTime;
 		double totalTime = (numberOfBlocks - 1) * footprint;

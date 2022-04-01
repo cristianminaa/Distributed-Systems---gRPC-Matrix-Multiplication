@@ -19,7 +19,7 @@ option java_package = "com.example.grpc.server.grpcserver";
 package matrixlibrary;
 
 service MatrixService{
-  rpc multiplyBlock (MatrixRequest) returns (MatrixResponse) {}
+  rpc multiplyMatrix (MatrixRequest) returns (MatrixResponse) {}
   rpc addBlock (MatrixRequest) returns (MatrixResponse) {}
 }
 
