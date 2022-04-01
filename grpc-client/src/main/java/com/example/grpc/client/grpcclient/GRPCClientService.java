@@ -73,9 +73,9 @@ public class GRPCClientService {
 			for (int j = i; j < rowLength * index; j += 2) {
 				if (j == i) {
 					lastResponse = stubs.get(currentServer)
-							.addBlocks(requestFromBlockAddMatrix(blocks.get(j), blocks.get(j + 1)));
+							.addBlock(requestFromBlockAddMatrix(blocks.get(j), blocks.get(j + 1)));
 				} else {
-					lastResponse = stubs.get(currentServer).addBlocks(requestFromBlockAddMatrix(lastResponse, blocks.get(j)));
+					lastResponse = stubs.get(currentServer).addBlock(requestFromBlockAddMatrix(lastResponse, blocks.get(j)));
 					j -= 1;
 				}
 			}
@@ -212,7 +212,7 @@ public class GRPCClientService {
 	}
 
 	static double getDeadline(Matrix A1, Matrix A2, MatrixServiceBlockingStub stub, int numberOfBlocks, double deadline) {
-		int deadlineMilis = deadline * 1000;
+		int deadlineMilis = (int) deadline * 1000;
 		double startTime = System.currentTimeMillis();
 		MatrixResponse temp = stub.multiplyMatrix(MatrixRequest.newBuilder().setA(A1).setB(A2).build());
 		double endTime = System.currentTimeMillis();
