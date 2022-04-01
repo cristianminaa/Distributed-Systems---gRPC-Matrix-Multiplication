@@ -212,7 +212,7 @@ public class GRPCClientService {
 	}
 
 	static double getDeadline(Matrix A1, Matrix A2, MatrixServiceBlockingStub stub, int numberOfBlocks, double deadline) {
-		int deadlineMilis = (int) deadline * 1000;
+		int deadlineMilis = (int) (deadline * 1000);
 		double startTime = System.currentTimeMillis();
 		MatrixResponse temp = stub.multiplyMatrix(MatrixRequest.newBuilder().setA(A1).setB(A2).build());
 		double endTime = System.currentTimeMillis();
