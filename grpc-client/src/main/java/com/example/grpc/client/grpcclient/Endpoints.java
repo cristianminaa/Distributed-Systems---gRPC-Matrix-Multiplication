@@ -44,7 +44,7 @@ public class Endpoints {
 		this.grpcClientService = grpcClientService;
 	}
 
-	@GetMapping("/")
+	@GetMapping("/main")
 	public String showUploadedFiles(Model model) throws IOException {
 		model.addAttribute("files",
 				storageService.loadAll()
@@ -68,7 +68,7 @@ public class Endpoints {
 		return ResponseEntity.notFound().build();
 	}
 
-	@PostMapping("/")
+	@PostMapping("/upload")
 	public String fileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
 		System.out.println(file);
 		if (!file.isEmpty()) {
