@@ -12,6 +12,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,7 +28,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.grpc.client.grpcclient.storage.StorageFileNotFoundException;
 import com.example.grpc.client.grpcclient.storage.StorageService;
 
-@Controller
+@RestController
 public class Endpoints {
 
 	private final StorageService storageService;
@@ -52,7 +53,7 @@ public class Endpoints {
 								.fromMethodName(Endpoints.class, "serveFile", path.getFileName().toString())
 								.build().toUri().toString())
 						.collect(Collectors.toList()));
-		return "uploadForm";
+		return "uploadForm.html";
 	}
 
 	@GetMapping("/files/{filename:.+}")
@@ -80,7 +81,7 @@ public class Endpoints {
 					matrix1 = arrayFromFile(file);
 					if (matrix1 == null) {
 						redirectAttributes.addFlashAttribute("message", "Invalid matrix file " + file.getOriginalFilename() + "!");
-						return "redirect:/";
+						return "redirect:/main";
 					}
 					// if matrix is successfully converted to an array, then we check
 					// for any errors, and if there are, the program throws an error
