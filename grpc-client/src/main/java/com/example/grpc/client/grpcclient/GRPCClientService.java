@@ -161,7 +161,7 @@ public class GRPCClientService {
 		servers[7] = "34.134.41.58";
 
 		for (int i = 0; i < servers.length; i++) {
-			channels[i] = ManagedChannelBuilder.forAddress(servers[i], 8082).usePlaintext().build();
+			channels[i] = ManagedChannelBuilder.forAddress(servers[i], 9090).usePlaintext().build();
 			stubs.add(MatrixServiceGrpc.newBlockingStub(channels[i]));
 		}
 		return stubs;
