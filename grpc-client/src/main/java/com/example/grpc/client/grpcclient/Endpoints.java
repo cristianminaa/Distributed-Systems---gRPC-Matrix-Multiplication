@@ -120,7 +120,8 @@ public class Endpoints {
 		}
 		if (firstMatrixUploaded || secondMatrixUploaded) {
 			redirectAttributes.addFlashAttribute("message",
-					"You successfully uploaded the file " + file.getOriginalFilename() + " containing 2 matrices!");
+					"You successfully uploaded the file " + file.getOriginalFilename() + " containing the matrix!");
+		} else if (firstMatrixUploaded && secondMatrixUploaded) {
 			System.out
 					.println("You successfully uploaded both files/matrices");
 		}
