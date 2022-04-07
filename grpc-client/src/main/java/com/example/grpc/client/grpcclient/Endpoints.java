@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -70,7 +69,7 @@ public class Endpoints {
 	}
 
 	@PostMapping("/upload")
-	public String fileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
+	public void fileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
 		System.out.println(file);
 		if (!file.isEmpty()) {
 			try {
@@ -81,7 +80,6 @@ public class Endpoints {
 					matrix1 = arrayFromFile(file);
 					if (matrix1 == null) {
 						redirectAttributes.addFlashAttribute("message", "Invalid matrix file " + file.getOriginalFilename() + "!");
-						return "redirect:/main";
 					}
 					// if matrix is successfully converted to an array, then we check
 					// for any errors, and if there are, the program throws an error
@@ -91,8 +89,8 @@ public class Endpoints {
 						int columns = matrix1[0].length;
 						if (rows < 1 || columns < 1 || rows != columns || !isPowerOfTwo(rows) || !isPowerOfTwo(columns)) {
 							redirectAttributes.addFlashAttribute("message", "Invalid upload! Check your matrix.");
-							return "redirect:/main";
 						} else {
+							System.out.println("First matrix succesfully uploaded");
 							firstMatrixUploaded = true;
 							storageService.store(file);
 						}
@@ -102,15 +100,14 @@ public class Endpoints {
 					if (matrix2 == null) {
 						redirectAttributes.addFlashAttribute("message",
 								"Invalid Matrix! Check error message for file " + file.getOriginalFilename() + "!");
-						return "redirect:/main";
 					} else {
 						int rows = matrix2.length;
 						int columns = matrix2[0].length;
 						if (rows < 1 || columns < 1 || rows != columns || !isPowerOfTwo(rows) || !isPowerOfTwo(columns)
 								|| rows != matrix2.length || columns != matrix2[0].length) {
 							redirectAttributes.addFlashAttribute("message", "Invalid upload! Check your matrix.");
-							return "redirect:/main";
 						} else {
+							System.out.println("Second matrix succesfully uploaded");
 							secondMatrixUploaded = true;
 							storageService.store(file);
 						}
@@ -119,16 +116,15 @@ public class Endpoints {
 				// we are catching exceptions here in case of any unforeseen errors
 			} catch (Exception e) {
 				redirectAttributes.addFlashAttribute("message", "Invalid upload! Check your matrix.");
-				return "redirect:/main";
 			}
 		}
 		if (firstMatrixUploaded || secondMatrixUploaded) {
 			redirectAttributes.addFlashAttribute("message",
 					"You successfully uploaded the file " + file.getOriginalFilename() + " containing 2 matrices!");
-			return "redirect:/main";
+			System.out
+					.println("You successfully uploaded both files/matrices");
 		}
 		redirectAttributes.addFlashAttribute("message", "Invalid upload! Check your matrix.");
-		return "redirect:/main";
 	}
 
 	@RequestMapping(value = "/main", method = RequestMethod.POST, params = "simpleMult")
