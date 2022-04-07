@@ -121,6 +121,7 @@ public class Endpoints {
 		if (firstMatrixUploaded || secondMatrixUploaded) {
 			redirectAttributes.addFlashAttribute("message",
 					"You successfully uploaded the file " + file.getOriginalFilename() + " containing a matrix!");
+			System.out.println("You successfully uploaded the file " + file.getOriginalFilename() + " containing a matrix!");
 		}
 		if (firstMatrixUploaded && secondMatrixUploaded) {
 			System.out
@@ -129,9 +130,8 @@ public class Endpoints {
 		redirectAttributes.addFlashAttribute("message", "Invalid upload! Check your matrix.");
 	}
 
-	@RequestMapping(value = "/main", method = RequestMethod.POST, params = "simpleMult")
-	public String simpleMult(
-			@RequestParam("simple") HttpServletRequest request, Model uiModel, RedirectAttributes redirectAttributes) {
+	@RequestMapping(value = "/simpleMult")
+	public String simpleMult(HttpServletRequest request, Model uiModel, RedirectAttributes redirectAttributes) {
 		int[][] result = GRPCClientService.multiplyMatrix(matrix1, matrix2, Double.MAX_VALUE);
 		System.out.println("Simple multiplication");
 		redirectAttributes.addAttribute("result", result);
