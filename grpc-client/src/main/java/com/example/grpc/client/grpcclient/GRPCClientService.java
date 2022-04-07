@@ -151,14 +151,14 @@ public class GRPCClientService {
 		ArrayList<MatrixServiceBlockingStub> stubs = new ArrayList<MatrixServiceBlockingStub>();
 
 		String[] servers = new String[8];
-		servers[0] = "34.67.211.204";
-		servers[1] = "130.211.118.55";
-		servers[2] = "34.71.119.10";
-		servers[3] = "35.239.7.15";
-		servers[4] = "34.135.108.137";
-		servers[5] = "34.135.45.192";
-		servers[6] = "162.222.182.150";
-		servers[7] = "34.121.46.209";
+		servers[0] = "35.192.125.93";
+		servers[1] = "34.69.16.220";
+		servers[2] = "104.154.107.40";
+		servers[3] = "34.68.140.64";
+		servers[4] = "34.123.212.180";
+		servers[5] = "34.122.85.22";
+		servers[6] = "104.198.49.136";
+		servers[7] = "34.134.41.58";
 
 		for (int i = 0; i < servers.length; i++) {
 			channels[i] = ManagedChannelBuilder.forAddress(servers[i], 8082).usePlaintext().build();
