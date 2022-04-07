@@ -90,7 +90,7 @@ public class Endpoints {
 						int columns = matrix1[0].length;
 						if (rows < 1 || columns < 1 || rows != columns || !isPowerOfTwo(rows) || !isPowerOfTwo(columns)) {
 							redirectAttributes.addFlashAttribute("message", "Invalid upload! Check your matrix.");
-							return "redirect:/";
+							return "redirect:/main";
 						} else {
 							firstMatrixUploaded = true;
 							storageService.store(file);
@@ -101,14 +101,14 @@ public class Endpoints {
 					if (matrix2 == null) {
 						redirectAttributes.addFlashAttribute("message",
 								"Invalid Matrix! Check error message for file " + file.getOriginalFilename() + "!");
-						return "redirect:/";
+						return "redirect:/main";
 					} else {
 						int rows = matrix2.length;
 						int columns = matrix2[0].length;
 						if (rows < 1 || columns < 1 || rows != columns || !isPowerOfTwo(rows) || !isPowerOfTwo(columns)
 								|| rows != matrix2.length || columns != matrix2[0].length) {
 							redirectAttributes.addFlashAttribute("message", "Invalid upload! Check your matrix.");
-							return "redirect:/";
+							return "redirect:/main";
 						} else {
 							secondMatrixUploaded = true;
 							storageService.store(file);
@@ -118,19 +118,19 @@ public class Endpoints {
 				// we are catching exceptions here in case of any unforeseen errors
 			} catch (Exception e) {
 				redirectAttributes.addFlashAttribute("message", "Invalid upload! Check your matrix.");
-				return "redirect:/";
+				return "redirect:/main";
 			}
 		}
 		if (firstMatrixUploaded || secondMatrixUploaded) {
 			redirectAttributes.addFlashAttribute("message",
 					"You successfully uploaded the file " + file.getOriginalFilename() + " containing 2 matrices!");
-			return "redirect:/";
+			return "redirect:/main";
 		}
 		redirectAttributes.addFlashAttribute("message", "Invalid upload! Check your matrix.");
-		return "redirect:/";
+		return "redirect:/main";
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.POST, params = "simpleMult")
+	@RequestMapping(value = "/simpleMult", method = RequestMethod.POST, params = "simpleMult")
 	public String simpleMult(HttpServletRequest request, Model uiModel, RedirectAttributes redirectAttributes) {
 		int[][] result = grpcClientService.multiplyMatrix(matrix1, matrix2, Double.MAX_VALUE);
 		System.out.println("Simple multiplication");
@@ -138,7 +138,7 @@ public class Endpoints {
 		return "redirect:/result/{result}";
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.POST, params = "deadlineMult")
+	@RequestMapping(value = "/deadlineMult", method = RequestMethod.POST, params = "deadlineMult")
 	public String deadlineMult(@RequestParam("deadline") String seconds, HttpServletRequest request, Model uiModel,
 			RedirectAttributes redirectAttributes) {
 		Double secondsDouble = Double.valueOf(seconds);
@@ -168,6 +168,7 @@ public class Endpoints {
 			}
 		} catch (Exception e) {
 			System.out.println("Error converting the file to an array!");
+			System.out.println(e.toString());
 			return null;
 		}
 		int[][] cellsArray = MatrixAsArrayFromArrayList(cells);
