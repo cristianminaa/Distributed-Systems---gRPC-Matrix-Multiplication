@@ -53,7 +53,7 @@ public class Endpoints {
 								.fromMethodName(Endpoints.class, "serveFile", path.getFileName().toString())
 								.build().toUri().toString())
 						.collect(Collectors.toList()));
-		return "uploadForm.html";
+		return "uploadForm";
 	}
 
 	@GetMapping("/files/{filename:.+}")
@@ -131,7 +131,7 @@ public class Endpoints {
 		return "redirect:/main";
 	}
 
-	@RequestMapping(value = "/simpleMult", method = RequestMethod.POST, params = "simpleMult")
+	@RequestMapping(value = "/main", method = RequestMethod.POST, params = "simpleMult")
 	public String simpleMult(HttpServletRequest request, Model uiModel, RedirectAttributes redirectAttributes) {
 		int[][] result = grpcClientService.multiplyMatrix(matrix1, matrix2, Double.MAX_VALUE);
 		System.out.println("Simple multiplication");
@@ -139,7 +139,7 @@ public class Endpoints {
 		return "redirect:/result/{result}";
 	}
 
-	@RequestMapping(value = "/deadlineMult", method = RequestMethod.POST, params = "deadlineMult")
+	@RequestMapping(value = "/main", method = RequestMethod.POST, params = "deadlineMult")
 	public String deadlineMult(@RequestParam("deadline") String seconds, HttpServletRequest request, Model uiModel,
 			RedirectAttributes redirectAttributes) {
 		Double secondsDouble = Double.valueOf(seconds);
@@ -158,7 +158,7 @@ public class Endpoints {
 			String[] dataLines;
 			bytes = file.getBytes();
 			data = new String(bytes);
-			dataLines = data.split("\r\n");
+			dataLines = data.split("\n");
 			for (String line : dataLines) {
 				String[] numberAsString = line.split(" ");
 				int[] numbers = new int[numberAsString.length];
