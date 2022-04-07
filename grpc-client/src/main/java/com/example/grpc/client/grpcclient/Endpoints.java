@@ -132,7 +132,8 @@ public class Endpoints {
 	}
 
 	@RequestMapping(value = "/main", method = RequestMethod.POST, params = "simpleMult")
-	public String simpleMult(HttpServletRequest request, Model uiModel, RedirectAttributes redirectAttributes) {
+	public String simpleMult(
+			@RequestParam("simple") HttpServletRequest request, Model uiModel, RedirectAttributes redirectAttributes) {
 		int[][] result = grpcClientService.multiplyMatrix(matrix1, matrix2, Double.MAX_VALUE);
 		System.out.println("Simple multiplication");
 		redirectAttributes.addAttribute("result", result);
