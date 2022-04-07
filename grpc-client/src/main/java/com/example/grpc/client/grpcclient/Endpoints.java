@@ -130,7 +130,7 @@ public class Endpoints {
 		redirectAttributes.addFlashAttribute("message", "Invalid upload! Check your matrix.");
 	}
 
-	@RequestMapping(value = "/simpleMult")
+	@GetMapping("/simpleMult")
 	public String simpleMult(HttpServletRequest request, Model uiModel, RedirectAttributes redirectAttributes) {
 		int[][] result = GRPCClientService.multiplyMatrix(matrix1, matrix2, Double.MAX_VALUE);
 		System.out.println("Simple multiplication");
