@@ -40,8 +40,8 @@ public class GRPCClientService {
 
 		int serversNeeded = 1;
 		int currentServer = 0;
-		// we create all the servers as described in the getServers() function, but we
-		// only use what we need
+		// we create all the servers as described in the getServers() function, but
+		// we only use what we need
 		stubs = getServers();
 		for (int i = 0; i < A.length; i++) {
 			for (int j = 0; j < A.length; j++) {
@@ -92,14 +92,14 @@ public class GRPCClientService {
 
 	private static int[][] assembleMatrix(ArrayList<MatrixResponse> blocks, int rows, int columns) {
 		int matrix[][] = new int[rows][columns];
-		int block = 0;
+		int index = 0;
 		for (int i = 0; i < rows; i += 2) {
 			for (int j = 0; j < columns; j += 2) {
-				matrix[i][j] = blocks.get(block).getC().getC00();
-				matrix[i][j + 1] = blocks.get(block).getC().getC01();
-				matrix[i + 1][j] = blocks.get(block).getC().getC10();
-				matrix[i + 1][j + 1] = blocks.get(block).getC().getC11();
-				block++;
+				matrix[i][j] = blocks.get(index).getC().getC00();
+				matrix[i][j + 1] = blocks.get(index).getC().getC01();
+				matrix[i + 1][j] = blocks.get(index).getC().getC10();
+				matrix[i + 1][j + 1] = blocks.get(index).getC().getC11();
+				index++;
 			}
 		}
 		return matrix;
@@ -151,7 +151,7 @@ public class GRPCClientService {
 		ArrayList<MatrixServiceBlockingStub> stubs = new ArrayList<MatrixServiceBlockingStub>();
 
 		String[] servers = new String[8];
-		servers[0] = "35.192.125.93";
+		servers[0] = "104.198.18.4";
 		servers[1] = "34.69.16.220";
 		servers[2] = "104.154.107.40";
 		servers[3] = "34.68.140.64";
@@ -222,9 +222,7 @@ public class GRPCClientService {
 		int serversNeeded = (int) (totalTime / newDeadline);
 
 		System.out.println("Elapsed time for 1 block: " + footprint);
-		System.out.println();
 		System.out.println("Total elapsed time: " + totalTime);
-		System.out.println();
 		System.out.println("Number of blocks: " + numberOfBlocks);
 
 		if (serversNeeded > 8) {

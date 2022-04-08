@@ -69,6 +69,12 @@ public class Endpoints {
 	}
 
 	@PostMapping("/upload")
+	public void deadlineUpload(@RequestParam("deadline") double uploadedDeadline) {
+		deadline = uploadedDeadline;
+		System.out.println("deadline: " + deadline);
+	}
+
+	@PostMapping("/upload")
 	public void fileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
 		System.out.println(file);
 		if (!file.isEmpty()) {
@@ -93,6 +99,7 @@ public class Endpoints {
 							System.out.println("First matrix succesfully uploaded");
 							firstMatrixUploaded = true;
 							storageService.store(file);
+							System.out.println(matrix1);
 						}
 					}
 				} else if (!secondMatrixUploaded) {
@@ -110,6 +117,7 @@ public class Endpoints {
 							System.out.println("Second matrix succesfully uploaded");
 							secondMatrixUploaded = true;
 							storageService.store(file);
+							System.out.println(matrix2);
 						}
 					}
 				}
@@ -134,8 +142,9 @@ public class Endpoints {
 	public String simpleMult(HttpServletRequest request, Model uiModel, RedirectAttributes redirectAttributes) {
 		int[][] result = GRPCClientService.multiplyMatrix(matrix1, matrix2, Double.MAX_VALUE);
 		System.out.println("Simple multiplication");
-		redirectAttributes.addAttribute("result", result);
-		return "redirect:/result/{result}";
+		redirectAttributes.addAttribute("result is ", result);
+		System.out.println("result is " + result);
+		return "result is " + result;
 	}
 
 	@RequestMapping(value = "/main", method = RequestMethod.POST, params = "deadlineMult")
