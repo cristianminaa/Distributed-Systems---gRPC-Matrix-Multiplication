@@ -68,10 +68,10 @@ public class Endpoints {
 		return ResponseEntity.notFound().build();
 	}
 
-	@PostMapping("/upload")
+	@PostMapping("/uploadDeadline")
 	public void deadlineUpload(@RequestParam("deadline") double uploadedDeadline) {
 		deadline = uploadedDeadline;
-		System.out.println("deadline: " + deadline);
+		System.out.println("Uploaded deadline is " + deadline);
 	}
 
 	@PostMapping("/upload")
