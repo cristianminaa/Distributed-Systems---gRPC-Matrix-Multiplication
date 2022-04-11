@@ -51,8 +51,6 @@ public class GRPCClientService {
 		// we create all the servers as described in the getServers() function, but
 		// we only use what we need
 		stubs = getServers();
-		System.out.println("Stubs are:");
-		System.out.println(stubs);
 		System.out.println("Running loop");
 		for (int i = 0; i < A.length; i++) {
 			for (int j = 0; j < A.length; j++) {
@@ -63,7 +61,8 @@ public class GRPCClientService {
 					System.out.println("Input matrix succesfully");
 					if (i == 0 && j == 0 && k == 0) {
 						System.out.println("Getting deadline");
-						serversNeeded = getDeadline(A1, A2, stubs.get(currentServer), (blockA.size() * blockA.size()), deadline);
+						serversNeeded = getDeadline(A1, A2, blocks, stubs.get(currentServer), (blockA.size() * blockA.size()),
+								deadline);
 						continue;
 					}
 					System.out.println("Multiplying Blocks");
@@ -228,12 +227,14 @@ public class GRPCClientService {
 		return;
 	}
 
-	static int getDeadline(Matrix A1, Matrix A2, MatrixServiceBlockingStub stub, int numberOfBlocks, double deadline) {
+	static int getDeadline(Matrix A1, Matrix A2, ArrayList<MatrixResponse> responses, MatrixServiceBlockingStub stub,
+			int numberOfBlocks, double deadline) {
 		System.out.println("Starting to get deadline");
 		int deadlineMilis = (int) (deadline * 1000);
 		double startTime = System.currentTimeMillis();
 		System.out.println("Start time: " + startTime + ", running multiplyBlock");
 		MatrixResponse temp = stub.multiplyBlock(requestFromMatrix(A1, A2));
+		responses.add(temp);
 		System.out.println("Ran multiplyBlock sucessfully");
 		double endTime = System.currentTimeMillis();
 		double footprint = endTime - startTime;
