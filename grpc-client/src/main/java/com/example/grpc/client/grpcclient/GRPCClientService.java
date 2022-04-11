@@ -227,14 +227,19 @@ public class GRPCClientService {
 	}
 
 	static int getDeadline(Matrix A1, Matrix A2, MatrixServiceBlockingStub stub, int numberOfBlocks, double deadline) {
+		System.out.println("Starting to get deadline");
 		int deadlineMilis = (int) (deadline * 1000);
 		double startTime = System.currentTimeMillis();
-		MatrixResponse temp = stub.multiplyBlock(MatrixRequest.newBuilder().setA(A1).setB(A2).build());
+		System.out.println("Start time: " + startTime + ", running multiplyBlock");
+		MatrixResponse temp = stub.multiplyBlock(requestFromBlock(A1, A2));
+		System.out.println("Ran multiplyBlock sucessfully");
 		double endTime = System.currentTimeMillis();
 		double footprint = endTime - startTime;
+		System.out.println("Footprint is " + footprint);
 		double totalTime = (numberOfBlocks - 1) * footprint;
 		double newDeadline = deadlineMilis - footprint;
 		int serversNeeded = (int) (totalTime / newDeadline);
+		System.out.println("Servers needed " + serversNeeded);
 
 		System.out.println("Elapsed time for 1 block: " + footprint);
 		System.out.println("Total elapsed time: " + totalTime);
