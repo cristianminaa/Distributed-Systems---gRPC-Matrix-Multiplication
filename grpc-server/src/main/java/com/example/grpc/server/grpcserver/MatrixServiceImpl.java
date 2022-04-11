@@ -65,7 +65,7 @@ public class MatrixServiceImpl extends MatrixServiceGrpc.MatrixServiceImplBase {
 		System.out.println("Request received from client:\n" + request);
 		int[][] matrixA = matrixToArray(request.getA());
 		int[][] matrixB = matrixToArray(request.getB());
-		int[][] newMatrix = multiplyMatrix(matrixA, matrixB);
+		int[][] newMatrix = multiplyBlock(matrixA, matrixB);
 		MatrixResponse response = MatrixResponse.newBuilder()
 				.setC(arrayToMatrix(newMatrix))
 				.build();

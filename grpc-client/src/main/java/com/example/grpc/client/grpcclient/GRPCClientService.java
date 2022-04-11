@@ -61,7 +61,7 @@ public class GRPCClientService {
 					System.out.println("Input matrix succesfully");
 					if (i == 0 && j == 0 && k == 0) {
 						System.out.println("Getting deadline");
-						serversNeeded = getDeadline(A1, A2, stubs.get(0), (blockA.size() * blockA.size()), deadline);
+						serversNeeded = getDeadline(A1, A2, stubs.get(currentServer), (blockA.size() * blockA.size()), deadline);
 						continue;
 					}
 					System.out.println("Multiplying Blocks");
