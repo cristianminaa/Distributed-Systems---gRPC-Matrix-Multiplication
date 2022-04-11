@@ -25,14 +25,21 @@ public class GRPCClientService {
 	static int[][] multiplyMatrix(int A[][], int B[][], double deadline) {
 		System.out.println("It got into GRPCClientService multiplyMatrix");
 		ArrayList<int[][]> blockA = splitInBlocks(A);
+		System.out.println("Split block A succesfully");
 		ArrayList<int[][]> blockB = splitInBlocks(B);
+		System.out.println("Split block B succesfully");
+		System.out.println("Getting result");
 		ArrayList<MatrixResponse> blocks = getResult(blockA, blockB, deadline);
+		System.out.println("Got result");
+		System.out.println("Assembling matrix");
 		int[][] result = assembleMatrix(blocks, A.length, A[0].length);
+		System.out.println("Assembled matrix succesfully");
 		printMatrix(result);
 		return result;
 	}
 
 	static ArrayList<MatrixResponse> getResult(ArrayList<int[][]> blockA, ArrayList<int[][]> blockB, double deadline) {
+		System.out.println("Starting to get result");
 		ArrayList<MatrixResponse> blocks = new ArrayList<>();
 		ArrayList<MatrixServiceBlockingStub> stubs = null;
 
@@ -44,6 +51,7 @@ public class GRPCClientService {
 		// we create all the servers as described in the getServers() function, but
 		// we only use what we need
 		stubs = getServers();
+		System.out.println("Running loop");
 		for (int i = 0; i < A.length; i++) {
 			for (int j = 0; j < A.length; j++) {
 				for (int k = 0; k < A.length; k++) {
@@ -62,6 +70,7 @@ public class GRPCClientService {
 				}
 			}
 		}
+		System.out.println("Starting to add the blocks from the multiplication");
 		// here we add the blocks from the multiplication, starting with the block
 		// from server 0
 		currentServer = 0;
@@ -81,6 +90,7 @@ public class GRPCClientService {
 				}
 			}
 			addBlocks.add(lastResponse);
+			System.out.println("Added blocks from multiplication");
 			index++;
 			currentServer++;
 			// once we reach the last server, we start from server 0 again
