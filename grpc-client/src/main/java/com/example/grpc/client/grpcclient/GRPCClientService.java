@@ -55,13 +55,17 @@ public class GRPCClientService {
 		for (int i = 0; i < A.length; i++) {
 			for (int j = 0; j < A.length; j++) {
 				for (int k = 0; k < A.length; k++) {
+					System.out.println("Starting to input matrix");
 					Matrix A1 = A[i][k];
 					Matrix A2 = B[k][j];
+					System.out.println("Input matrix succesfully");
 					if (i == 0 && j == 0 && k == 0) {
+						System.out.println("Getting deadline");
 						serversNeeded = getDeadline(A1, A2, stubs.get(0), (blockA.size() * blockA.size()), deadline);
 						continue;
 					}
-					MatrixResponse C = stubs.get(currentServer).multiplyMatrix(requestFromBlock(A1, A2));
+					System.out.println("Multiplying Blocks");
+					MatrixResponse C = stubs.get(currentServer).multiplyBlock(requestFromBlock(A1, A2));
 					currentServer++;
 					if (currentServer == serversNeeded) {
 						currentServer = 0;
@@ -225,7 +229,7 @@ public class GRPCClientService {
 	static int getDeadline(Matrix A1, Matrix A2, MatrixServiceBlockingStub stub, int numberOfBlocks, double deadline) {
 		int deadlineMilis = (int) (deadline * 1000);
 		double startTime = System.currentTimeMillis();
-		MatrixResponse temp = stub.multiplyMatrix(MatrixRequest.newBuilder().setA(A1).setB(A2).build());
+		MatrixResponse temp = stub.multiplyBlock(MatrixRequest.newBuilder().setA(A1).setB(A2).build());
 		double endTime = System.currentTimeMillis();
 		double footprint = endTime - startTime;
 		double totalTime = (numberOfBlocks - 1) * footprint;
