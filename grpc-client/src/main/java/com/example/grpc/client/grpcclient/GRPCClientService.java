@@ -51,6 +51,8 @@ public class GRPCClientService {
 		// we create all the servers as described in the getServers() function, but
 		// we only use what we need
 		stubs = getServers();
+		System.out.println("Stubs are:");
+		System.out.println(stubs);
 		System.out.println("Running loop");
 		for (int i = 0; i < A.length; i++) {
 			for (int j = 0; j < A.length; j++) {
@@ -206,8 +208,8 @@ public class GRPCClientService {
 		return C;
 	}
 
-	public static MatrixRequest requestFromBlock(Matrix... M) {
-		MatrixRequest request = MatrixRequest.newBuilder().setA((M[0])).setB((M[1])).build();
+	public static MatrixRequest requestFromMatrix(Matrix matrix1, Matrix matrix2) {
+		MatrixRequest request = MatrixRequest.newBuilder().setA(matrix1).setB(matrix2).build();
 		return request;
 	}
 
@@ -231,7 +233,7 @@ public class GRPCClientService {
 		int deadlineMilis = (int) (deadline * 1000);
 		double startTime = System.currentTimeMillis();
 		System.out.println("Start time: " + startTime + ", running multiplyBlock");
-		MatrixResponse temp = stub.multiplyBlock(requestFromBlock(A1, A2));
+		MatrixResponse temp = stub.multiplyBlock(requestFromMatrix(A1, A2));
 		System.out.println("Ran multiplyBlock sucessfully");
 		double endTime = System.currentTimeMillis();
 		double footprint = endTime - startTime;
