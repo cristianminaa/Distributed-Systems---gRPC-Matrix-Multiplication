@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.example.grpc.server.grpcserver.MatrixRequest;
-import com.example.grpc.server.grpcserver.Matrix;
-import com.example.grpc.server.grpcserver.MatrixResponse;
-import com.example.grpc.server.grpcserver.MatrixServiceGrpc;
-import com.example.grpc.server.grpcserver.MatrixServiceGrpc.MatrixServiceBlockingStub;
+import com.example.grpc.client.grpcclient.MatrixRequest;
+import com.example.grpc.client.grpcclient.Matrix;
+import com.example.grpc.client.grpcclient.MatrixResponse;
+import com.example.grpc.client.grpcclient.MatrixServiceGrpc;
+import com.example.grpc.client.grpcclient.MatrixServiceGrpc.MatrixServiceBlockingStub;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import net.devh.boot.grpc.client.inject.GrpcClient;

@@ -97,9 +97,9 @@ public class Endpoints {
 							redirectAttributes.addFlashAttribute("message", "Invalid upload! Check your matrix.");
 						} else {
 							System.out.println("First matrix succesfully uploaded");
+							printMatrix(matrix1);
 							firstMatrixUploaded = true;
 							storageService.store(file);
-							System.out.println(matrix1);
 						}
 					}
 				} else if (!secondMatrixUploaded) {
@@ -115,9 +115,9 @@ public class Endpoints {
 							redirectAttributes.addFlashAttribute("message", "Invalid upload! Check your matrix.");
 						} else {
 							System.out.println("Second matrix succesfully uploaded");
+							printMatrix(matrix2);
 							secondMatrixUploaded = true;
 							storageService.store(file);
-							System.out.println(matrix2);
 						}
 					}
 				}
@@ -206,5 +206,15 @@ public class Endpoints {
 			return false;
 		}
 		return number > 0 && ((number & (number - 1)) == 0);
+	}
+
+	private static void printMatrix(int[][] matrix) {
+		for (int i = 0; i < matrix.length; i++) {
+			for (int j = 0; j < matrix[i].length; j++) {
+				System.out.print(matrix[i][j] + " ");
+			}
+			System.out.println();
+		}
+		return;
 	}
 }
