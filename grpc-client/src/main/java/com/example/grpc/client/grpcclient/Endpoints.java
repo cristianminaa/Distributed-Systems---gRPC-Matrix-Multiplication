@@ -135,7 +135,6 @@ public class Endpoints {
 			System.out
 					.println("You successfully uploaded both files/matrices");
 		}
-		System.out.println("Invalid upload! Check your matrix.");
 	}
 
 	@GetMapping("/simpleMult")

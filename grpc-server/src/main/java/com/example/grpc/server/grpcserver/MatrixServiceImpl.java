@@ -8,7 +8,7 @@ public class MatrixServiceImpl extends MatrixServiceGrpc.MatrixServiceImplBase {
 
 	private static final int MAX = 4;
 
-	public static int[][] multiplyMatrix(int A[][], int B[][]) {
+	public static int[][] multiplyBlock(int A[][], int B[][]) {
 		int C[][] = new int[MAX][MAX];
 		C[0][0] = A[0][0] * B[0][0] + A[0][1] * B[1][0];
 		C[0][1] = A[0][0] * B[0][1] + A[0][1] * B[1][1];
@@ -61,7 +61,7 @@ public class MatrixServiceImpl extends MatrixServiceGrpc.MatrixServiceImplBase {
 	}
 
 	@Override
-	public void multiplyMatrix(MatrixRequest request, StreamObserver<MatrixResponse> reply) {
+	public void multiplyBlock(MatrixRequest request, StreamObserver<MatrixResponse> reply) {
 		System.out.println("Request received from client:\n" + request);
 		int[][] matrixA = matrixToArray(request.getA());
 		int[][] matrixB = matrixToArray(request.getB());
