@@ -23,6 +23,7 @@ public class GRPCClientService {
 	}
 
 	static int[][] multiplyMatrix(int A[][], int B[][], double deadline) {
+		System.out.println("It got into GRPCClientService multiplyMatrix");
 		ArrayList<int[][]> blockA = splitInBlocks(A);
 		ArrayList<int[][]> blockB = splitInBlocks(B);
 		ArrayList<MatrixResponse> blocks = getResult(blockA, blockB, deadline);
@@ -67,7 +68,7 @@ public class GRPCClientService {
 		ArrayList<MatrixResponse> addBlocks = new ArrayList<>();
 		MatrixResponse lastResponse = null;
 		int rows = A.length * 2;
-		int rowLength = A.length;
+		int rowLength = rows / 2;
 		int index = 1;
 		for (int i = 0; i < blocks.size(); i += rowLength) {
 			for (int j = i; j < rowLength * index; j += 2) {
@@ -76,12 +77,12 @@ public class GRPCClientService {
 							.addBlock(requestFromBlockAddMatrix(blocks.get(j), blocks.get(j + 1)));
 				} else {
 					lastResponse = stubs.get(currentServer).addBlock(requestFromBlockAddMatrix(lastResponse, blocks.get(j)));
-					j -= 1;
+					j--;
 				}
 			}
 			addBlocks.add(lastResponse);
-			index += 1;
-			currentServer += 1;
+			index++;
+			currentServer++;
 			// once we reach the last server, we start from server 0 again
 			if (currentServer == serversNeeded) {
 				currentServer = 0;
