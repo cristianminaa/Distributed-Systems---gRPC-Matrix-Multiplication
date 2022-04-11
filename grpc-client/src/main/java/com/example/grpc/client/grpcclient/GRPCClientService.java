@@ -67,7 +67,7 @@ public class GRPCClientService {
 						continue;
 					}
 					System.out.println("Multiplying Blocks");
-					MatrixResponse C = stubs.get(currentServer).multiplyBlock(requestFromBlock(A1, A2));
+					MatrixResponse C = stubs.get(currentServer).multiplyBlock(requestFromMatrix(A1, A2));
 					currentServer++;
 					if (currentServer == serversNeeded) {
 						currentServer = 0;
