@@ -134,10 +134,12 @@ public class GRPCClientService {
 	}
 
 	static ArrayList<int[][]> splitInBlocks(int[][] matrix) {
+		System.out.println("Splitting matrix in blocks, matrix to be split:");
 		ArrayList<int[][]> tempArray = new ArrayList<>();
-		System.out.println(matrix.toString());
+		printMatrix(matrix);
 		int x = 2;
 		int y = matrix.length;
+		System.out.println("Matrix length: " + y);
 		// here we loop through the first element of each column in the 2x2 block, and
 		// we add 2 to i because we will move 2 columns to the right
 		for (int i = 0; i < x - y + 1; i += 2) {
