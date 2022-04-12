@@ -45,17 +45,7 @@ public class GRPCClientService {
 		ArrayList<MatrixServiceBlockingStub> stubs = null;
 
 		Matrix[][] A = create2DBlocks(blockA);
-		System.out.println("Created A, printing blocks");
-		System.out.println(A[0][0]);
-		System.out.println(A[0][1]);
-		System.out.println(A[1][0]);
-		System.out.println(A[1][1]);
 		Matrix[][] B = create2DBlocks(blockB);
-		System.out.println("Created B, printing blocks");
-		System.out.println(B[0][0]);
-		System.out.println(B[0][1]);
-		System.out.println(B[1][0]);
-		System.out.println(B[1][1]);
 
 		int serversNeeded = 1;
 		int currentServer = 0;
@@ -232,14 +222,17 @@ public class GRPCClientService {
 
 	static Matrix[][] create2DBlocks(ArrayList<int[][]> block) {
 		int sqr = (int) (Math.sqrt(Double.parseDouble("" + block.size())));
+		System.out.println("SQR IN 2DBLOCKS IS: " + sqr);
 		Matrix C[][] = new Matrix[sqr][sqr];
 		int index = 0;
 		for (int i = 0; i < sqr; i++) {
+			System.out.println("Entered first for loop 2DBlocks");
 			System.out.println(Arrays.deepToString(block.get(i)));
 			Arrays.deepToString(block.get(i));
 			for (int j = 0; j < sqr; j++) {
+				System.out.println("Entered second for loop 2DBlocks");
 				C[i][j] = makeBlockFromArray(block.get(index));
-				System.out.println(C[i][j]);
+				printMatrixObject(C[i][j]);
 				index++;
 			}
 		}
