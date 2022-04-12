@@ -167,7 +167,7 @@ public class GRPCClientService {
 		ArrayList<MatrixServiceBlockingStub> stubs = new ArrayList<MatrixServiceBlockingStub>();
 
 		String[] servers = new String[8];
-		servers[0] = "34.69.204.78";
+		servers[0] = "35.224.99.101";
 		servers[1] = "34.69.16.220";
 		servers[2] = "104.154.107.40";
 		servers[3] = "34.68.140.64";
