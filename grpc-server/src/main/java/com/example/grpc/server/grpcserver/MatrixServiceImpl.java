@@ -13,7 +13,7 @@ public class MatrixServiceImpl extends MatrixServiceGrpc.MatrixServiceImplBase {
 
 	private static final int MAX = 4;
 
-	public static int[][] multiplyBlockArray(int A[][], int B[][]) {
+	public static int[][] multiplyBlockMatrix(int A[][], int B[][]) {
 		int C[][] = new int[MAX][MAX];
 		C[0][0] = A[0][0] * B[0][0] + A[0][1] * B[1][0];
 		C[0][1] = A[0][0] * B[0][1] + A[0][1] * B[1][1];
@@ -70,7 +70,7 @@ public class MatrixServiceImpl extends MatrixServiceGrpc.MatrixServiceImplBase {
 		System.out.println("Request received from client:\n" + request);
 		int[][] matrixA = matrixToArray(request.getA());
 		int[][] matrixB = matrixToArray(request.getB());
-		int[][] newMatrix = multiplyBlockArray(matrixA, matrixB);
+		int[][] newMatrix = multiplyBlockMatrix(matrixA, matrixB);
 		MatrixResponse response = MatrixResponse.newBuilder()
 				.setC(arrayToMatrix(newMatrix))
 				.build();
