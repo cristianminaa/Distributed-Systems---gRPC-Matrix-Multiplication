@@ -44,11 +44,12 @@ public class GRPCClientService {
 		ArrayList<MatrixResponse> blocks = new ArrayList<>();
 		ArrayList<MatrixServiceBlockingStub> stubs = null;
 
-		Matrix A[][] = create2DBlocks(blockA);
-		Matrix B[][] = create2DBlocks(blockB);
+		Matrix[][] A = create2DBlocks(blockA);
+		Matrix[][] B = create2DBlocks(blockB);
 
 		int serversNeeded = 1;
 		int currentServer = 0;
+
 		// we create all the servers as described in the getServers() function, but
 		// we only use what we need
 		stubs = getServers();
@@ -142,7 +143,7 @@ public class GRPCClientService {
 			// move 2 positions down the row
 			for (int j = 0; j < x - y + 1; j += 2) {
 				boolean[][] assigned = new boolean[x][x];
-				int tempBlock[][] = new int[x][x];
+				int[][] tempBlock = new int[x][x];
 				// we fill the tempBlock 2x2 block with values from matrix
 				for (int p = i; p < x + i; p++) {
 					int step = 0;
