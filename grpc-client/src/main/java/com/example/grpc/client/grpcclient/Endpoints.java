@@ -93,8 +93,10 @@ public class Endpoints {
 					else {
 						int rows = matrix1.length;
 						int columns = matrix1[0].length;
-						if (rows < 1 || columns < 1 || rows != columns || !isPowerOfTwo(rows) || !isPowerOfTwo(columns)) {
+						if (rows < 1 || columns < 1 || rows != columns || isPowerOfTwo(rows) == false
+								|| isPowerOfTwo(columns) == false) {
 							redirectAttributes.addFlashAttribute("message", "Invalid upload! Check your matrix.");
+							System.out.println("Invalid upload! Check your matrix.");
 						} else {
 							System.out.println("First matrix succesfully uploaded");
 							printMatrix(matrix1);
@@ -111,8 +113,9 @@ public class Endpoints {
 						int rows = matrix2.length;
 						int columns = matrix2[0].length;
 						if (rows < 1 || columns < 1 || rows != columns || isPowerOfTwo(rows) == false
-								|| isPowerOfTwo(columns) == false || rows != matrix2.length || columns != matrix2[0].length) {
+								|| isPowerOfTwo(columns) == false) {
 							redirectAttributes.addFlashAttribute("message", "Invalid upload! Check your matrix.");
+							System.out.println("Invalid upload! Check your matrix.");
 						} else {
 							System.out.println("Second matrix succesfully uploaded");
 							printMatrix(matrix2);
