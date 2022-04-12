@@ -26,9 +26,11 @@ public class GRPCClientService {
 		printMatrix(A);
 		ArrayList<int[][]> blockA = splitInBlocks(A);
 		System.out.println("Split block A succesfully");
+		System.out.println(blockA.toString());
 		printMatrix(B);
 		ArrayList<int[][]> blockB = splitInBlocks(B);
 		System.out.println("Split block B succesfully");
+		System.out.println(blockA.toString());
 		System.out.println("Getting result");
 		ArrayList<MatrixResponse> blocks = getResult(blockA, blockB, deadline);
 		System.out.println("Got result");
@@ -221,7 +223,7 @@ public class GRPCClientService {
 	}
 
 	static Matrix[][] create2DBlocks(ArrayList<int[][]> block) {
-		System.out.print(block.toString());
+		System.out.println(block.toString());
 		int sqr = (int) (Math.sqrt(Double.parseDouble("" + block.size())));
 		System.out.println("SQR IN 2DBLOCKS IS: " + sqr);
 		Matrix C[][] = new Matrix[sqr][sqr];
