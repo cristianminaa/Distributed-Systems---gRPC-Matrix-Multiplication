@@ -129,7 +129,7 @@ public class Endpoints {
 				// we are catching exceptions here in case of any unforeseen errors
 			} catch (Exception e) {
 				redirectAttributes.addFlashAttribute("message", "Invalid upload! Check your matrix.");
-				throw new Exception("Invalid upload! Check your matrix. Make sure it is a square matrix that is a power of 2.");
+				System.out.println("Invalid upload! Check your matrix. Make sure it is a square matrix that is a power of 2.");
 			}
 		}
 		if (firstMatrixUploaded || secondMatrixUploaded) {
