@@ -133,12 +133,12 @@ public class GRPCClientService {
 		return matrix;
 	}
 
-	static ArrayList<int[][]> splitInBlocks(int[][] matrix) {
+	static ArrayList<int[][]> splitInBlocks(int[][] matrixToBeSplit) {
 		System.out.println("Splitting matrix in blocks, matrix to be split:");
 		ArrayList<int[][]> tempArray = new ArrayList<>();
-		printMatrix(matrix);
+		printMatrix(matrixToBeSplit);
 		int x = 2;
-		int y = matrix.length;
+		int y = matrixToBeSplit.length;
 		System.out.println("Matrix length: " + y);
 		// here we loop through the first element of each column in the 2x2 block, and
 		// we add 2 to i because we will move 2 columns to the right
@@ -153,28 +153,24 @@ public class GRPCClientService {
 					int step = 0;
 					for (int q = j; q < x + j; q++) {
 						if (step == 0 && !assigned[0][0]) {
-							tempBlock[0][0] = matrix[p][q];
+							tempBlock[0][0] = matrixToBeSplit[p][q];
 							assigned[0][0] = true;
 							step++;
-							continue;
 						}
 						if (step == 1 && !assigned[0][1]) {
-							tempBlock[1][0] = matrix[p][q];
+							tempBlock[1][0] = matrixToBeSplit[p][q];
 							assigned[0][1] = true;
 							step++;
-							continue;
 						}
 						if (step == 2 && !assigned[1][0]) {
-							tempBlock[0][1] = matrix[p][q];
+							tempBlock[0][1] = matrixToBeSplit[p][q];
 							assigned[1][0] = true;
 							step++;
-							continue;
 						}
 						if (step == 3 && !assigned[1][1]) {
-							tempBlock[1][1] = matrix[p][q];
+							tempBlock[1][1] = matrixToBeSplit[p][q];
 							assigned[1][1] = true;
 							step++;
-							continue;
 						}
 					}
 				}
