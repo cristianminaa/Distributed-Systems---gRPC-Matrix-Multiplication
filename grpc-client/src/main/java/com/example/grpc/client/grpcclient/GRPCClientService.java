@@ -44,9 +44,7 @@ public class GRPCClientService {
 		ArrayList<MatrixServiceBlockingStub> stubs = null;
 
 		Matrix A[][] = create2DBlocks(blockA);
-		printMatrix(blockA);
 		Matrix B[][] = create2DBlocks(blockB);
-		printMatrix(blockB);
 
 		int serversNeeded = 1;
 		int currentServer = 0;
