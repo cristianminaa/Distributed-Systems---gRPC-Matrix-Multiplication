@@ -6,7 +6,7 @@ import com.example.grpc.server.grpcserver.MatrixRequest;
 import com.example.grpc.server.grpcserver.Matrix;
 import com.example.grpc.server.grpcserver.MatrixResponse;
 import com.example.grpc.server.grpcserver.MatrixServiceGrpc;
-import com.example.grpc.server.grpcserver.MatrixServiceGrpc.MatrixServiceBlockingStub;
+import com.example.grpc.server.grpcserver.MatrixServiceGrpc.MatrixServiceImplBase;
 
 @GrpcService
 public class MatrixServiceImpl extends MatrixServiceImplBase {
