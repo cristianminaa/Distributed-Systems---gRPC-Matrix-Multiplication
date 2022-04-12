@@ -52,6 +52,16 @@ public class MatrixServiceImpl extends MatrixServiceGrpc.MatrixServiceImplBase {
 		return C;
 	}
 
+	private static void printMatrix(int[][] matrix) {
+		for (int i = 0; i < matrix.length; i++) {
+			for (int j = 0; j < matrix[i].length; j++) {
+				System.out.print(matrix[i][j] + " ");
+			}
+			System.out.println("");
+		}
+		return;
+	}
+
 	@Override
 	public void addBlock(MatrixRequest request, StreamObserver<MatrixResponse> reply) {
 		System.out.println("Request received from client:\n" + request);
@@ -69,7 +79,9 @@ public class MatrixServiceImpl extends MatrixServiceGrpc.MatrixServiceImplBase {
 	public void multiplyBlock(MatrixRequest request, StreamObserver<MatrixResponse> reply) {
 		System.out.println("Request received from client:\n" + request);
 		int[][] matrixA = matrixToArray(request.getA());
+		printMatrix(matrixA);
 		int[][] matrixB = matrixToArray(request.getB());
+		printMatrix(matrixB);
 		int[][] newMatrix = multiplyBlockMatrix(matrixA, matrixB);
 		MatrixResponse response = MatrixResponse.newBuilder()
 				.setC(arrayToMatrix(newMatrix))

@@ -240,6 +240,10 @@ public class GRPCClientService {
 
 	static int getDeadline(Matrix A1, Matrix A2, ArrayList<MatrixResponse> responses, MatrixServiceBlockingStub stub,
 			int numberOfBlocks, double deadline) {
+		System.out.println("Matrix A1:");
+		printMatrixObject(A1);
+		System.out.println("Matrix A2:");
+		printMatrixObject(A2);
 		System.out.println("Starting to get deadline");
 		int deadlineMilis = (int) (deadline * 1000);
 		double startTime = System.currentTimeMillis();
