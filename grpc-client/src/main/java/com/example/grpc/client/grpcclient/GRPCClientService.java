@@ -221,7 +221,7 @@ public class GRPCClientService {
 	}
 
 	static Matrix[][] create2DBlocks(ArrayList<int[][]> block) {
-		System.out.print(Arrays.toString(blocks));
+		System.out.print(Arrays.toString(block));
 		int sqr = (int) (Math.sqrt(Double.parseDouble("" + block.size())));
 		System.out.println("SQR IN 2DBLOCKS IS: " + sqr);
 		Matrix C[][] = new Matrix[sqr][sqr];
