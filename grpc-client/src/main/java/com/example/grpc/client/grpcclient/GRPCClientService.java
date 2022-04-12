@@ -283,9 +283,9 @@ public class GRPCClientService {
 		System.out.println("Footprint is " + (int) footprint);
 		double totalTime = (numberOfBlocks - 1) * footprint;
 		System.out.println("Total time is " + (int) totalTime);
-		double newDeadline = (int) deadline - footprint;
-		System.out.println("New deadline is " + (int) newDeadline);
-		int serversNeeded = (int) (totalTime / newDeadline);
+		// double newDeadline = (int) deadline - footprint;
+		// System.out.println("New deadline is " + (int) newDeadline);
+		int serversNeeded = (int) (totalTime / deadline);
 
 		System.out.println("Elapsed time for 1 block: " + footprint);
 		System.out.println("Total elapsed time: " + totalTime);
