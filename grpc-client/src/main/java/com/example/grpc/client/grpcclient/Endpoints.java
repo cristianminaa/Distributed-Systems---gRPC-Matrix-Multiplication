@@ -127,6 +127,7 @@ public class Endpoints {
 				// we are catching exceptions here in case of any unforeseen errors
 			} catch (Exception e) {
 				redirectAttributes.addFlashAttribute("message", "Invalid upload! Check your matrix.");
+				System.out.println("Invalid upload! Check your matrix.");
 			}
 		}
 		if (firstMatrixUploaded || secondMatrixUploaded) {
