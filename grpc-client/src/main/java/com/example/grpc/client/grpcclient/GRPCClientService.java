@@ -43,6 +43,8 @@ public class GRPCClientService {
 		ArrayList<MatrixResponse> blocks = new ArrayList<>();
 		ArrayList<MatrixServiceBlockingStub> stubs = null;
 
+		printMatrix(blockA.toArray());
+		printMatrix(blockB.toArray());
 		Matrix A[][] = create2DBlocks(blockA);
 		Matrix B[][] = create2DBlocks(blockB);
 
