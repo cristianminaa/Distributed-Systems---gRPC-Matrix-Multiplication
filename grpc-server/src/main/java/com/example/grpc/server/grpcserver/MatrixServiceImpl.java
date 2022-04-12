@@ -9,7 +9,7 @@ import com.example.grpc.server.grpcserver.MatrixServiceGrpc;
 import com.example.grpc.server.grpcserver.MatrixServiceGrpc.MatrixServiceImplBase;
 
 @GrpcService
-public class MatrixServiceImpl extends MatrixServiceImplBase {
+public class MatrixServiceImpl extends MatrixServiceGrpc.MatrixServiceImplBase {
 
 	private static final int MAX = 4;
 
