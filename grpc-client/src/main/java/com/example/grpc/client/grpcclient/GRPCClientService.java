@@ -45,7 +45,17 @@ public class GRPCClientService {
 		ArrayList<MatrixServiceBlockingStub> stubs = null;
 
 		Matrix[][] A = create2DBlocks(blockA);
+		System.out.println("Created A, printing blocks");
+		printMatrixObject(A[0][0]);
+		printMatrixObject(A[0][1]);
+		printMatrixObject(A[1][0]);
+		printMatrixObject(A[1][1]);
 		Matrix[][] B = create2DBlocks(blockB);
+		System.out.println("Created B, printing blocks");
+		printMatrixObject(B[0][0]);
+		printMatrixObject(B[0][1]);
+		printMatrixObject(B[1][0]);
+		printMatrixObject(B[1][1]);
 
 		int serversNeeded = 1;
 		int currentServer = 0;
