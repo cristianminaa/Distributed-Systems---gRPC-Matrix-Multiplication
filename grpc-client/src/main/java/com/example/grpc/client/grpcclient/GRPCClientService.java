@@ -49,13 +49,12 @@ public class GRPCClientService {
 
 		int serversNeeded = 1;
 		int currentServer = 0;
-
+		int length = A.length;
 		// we create all the servers as described in the getServers() function, but
 		// we only use what we need
 		stubs = getServers();
 		System.out.println("Running loop");
-		System.out.println("A length: " + A.length());
-		System.out.println("A length: " + A.length);
+		System.out.println("A length: " + length);
 		for (int i = 0; i < A.length; i++) {
 			System.out.println("Inside first loop");
 			for (int j = 0; j < A.length; j++) {
