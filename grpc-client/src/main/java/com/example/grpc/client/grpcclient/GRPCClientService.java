@@ -158,19 +158,19 @@ public class GRPCClientService {
 							step++;
 							continue;
 						}
-						if (step == 1 && !assigned[1][0]) {
+						if (step == 0 && !assigned[1][0]) {
 							tempBlock[1][0] = matrixToBeSplit[p][q];
 							assigned[1][0] = true;
 							step++;
 							continue;
 						}
-						if (step == 2 && !assigned[0][1]) {
+						if (step == 1 && !assigned[0][1]) {
 							tempBlock[0][1] = matrixToBeSplit[p][q];
 							assigned[0][1] = true;
 							step++;
 							continue;
 						}
-						if (step == 3 && !assigned[1][1]) {
+						if (step == 1 && !assigned[1][1]) {
 							tempBlock[1][1] = matrixToBeSplit[p][q];
 							assigned[1][1] = true;
 							step++;
