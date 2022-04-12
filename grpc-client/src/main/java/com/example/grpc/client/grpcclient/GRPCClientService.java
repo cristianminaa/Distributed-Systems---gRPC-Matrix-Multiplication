@@ -77,7 +77,7 @@ public class GRPCClientService {
 								deadline);
 						continue;
 					}
-					System.out.println("Multiplying blocks");
+					// System.out.println("Multiplying blocks");
 					MatrixResponse C = stubs.get(currentServer).multiplyBlock(requestFromMatrix(A1, A2));
 					currentServer++;
 					if (currentServer == serversNeeded) {
@@ -107,7 +107,7 @@ public class GRPCClientService {
 				}
 			}
 			addBlocks.add(lastResponse);
-			System.out.println("Added blocks from multiplication");
+			// System.out.println("Added blocks from multiplication");
 			index++;
 			currentServer++;
 			// once we reach the last server, we start from server 0 again
@@ -237,7 +237,7 @@ public class GRPCClientService {
 			for (int j = 0; j < sqr; j++) {
 				// System.out.println("Entered second for loop 2DBlocks");
 				C[i][j] = makeBlockFromArray(block.get(index));
-				printMatrixObject(C[i][j]);
+				// printMatrixObject(C[i][j]);
 				index++;
 			}
 		}
@@ -267,9 +267,9 @@ public class GRPCClientService {
 	static int getDeadline(Matrix A1, Matrix A2, ArrayList<MatrixResponse> responses, MatrixServiceBlockingStub stub,
 			int numberOfBlocks, double deadline) {
 		System.out.println("Matrix A1:");
-		printMatrixObject(A1);
+		// printMatrixObject(A1);
 		System.out.println("Matrix A2:");
-		printMatrixObject(A2);
+		// printMatrixObject(A2);
 		System.out.println("Starting to get deadline");
 		int deadlineMilis = (int) (deadline * 1000);
 		double startTime = System.currentTimeMillis();

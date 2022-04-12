@@ -140,7 +140,7 @@ public class Endpoints {
 	@GetMapping("/simpleMult")
 	public String simpleMult(HttpServletRequest request, Model uiModel, RedirectAttributes redirectAttributes) {
 		int[][] result = GRPCClientService.multiplyMatrix(matrix1, matrix2, Double.MAX_VALUE);
-		System.out.println("Simple multiplication");
+		// System.out.println("Simple multiplication");
 		redirectAttributes.addAttribute("result is ", result);
 		// System.out.println("result is " + result);
 		return "result is " + result;
