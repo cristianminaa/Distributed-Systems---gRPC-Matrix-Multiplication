@@ -160,13 +160,13 @@ public class GRPCClientService {
 						}
 						if (step == 1 && !assigned[1][0]) {
 							tempBlock[1][0] = matrixToBeSplit[p][q];
-							assigned[0][1] = true;
+							assigned[1][0] = true;
 							step++;
 							continue;
 						}
 						if (step == 2 && !assigned[0][1]) {
 							tempBlock[0][1] = matrixToBeSplit[p][q];
-							assigned[1][0] = true;
+							assigned[0][1] = true;
 							step++;
 							continue;
 						}
