@@ -54,6 +54,7 @@ public class GRPCClientService {
 		// we only use what we need
 		stubs = getServers();
 		System.out.println("Running loop");
+		System.out.println("A length: " + A.length());
 		System.out.println("A length: " + A.length);
 		for (int i = 0; i < A.length; i++) {
 			System.out.println("Inside first loop");
