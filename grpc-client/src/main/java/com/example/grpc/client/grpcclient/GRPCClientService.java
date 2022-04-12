@@ -23,9 +23,10 @@ public class GRPCClientService {
 	}
 
 	static int[][] multiplyMatrix(int A[][], int B[][], double deadline) {
-		System.out.println("It got into GRPCClientService multiplyMatrix");
+		printMatrix(A);
 		ArrayList<int[][]> blockA = splitInBlocks(A);
 		System.out.println("Split block A succesfully");
+		printMatrix(B);
 		ArrayList<int[][]> blockB = splitInBlocks(B);
 		System.out.println("Split block B succesfully");
 		System.out.println("Getting result");
