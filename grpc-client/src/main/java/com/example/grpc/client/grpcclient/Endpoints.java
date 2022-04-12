@@ -96,7 +96,6 @@ public class Endpoints {
 						if (rows < 1 || columns < 1 || rows != columns || isPowerOfTwo(rows) == false
 								|| isPowerOfTwo(columns) == false) {
 							redirectAttributes.addFlashAttribute("message", "Invalid upload! Check your matrix.");
-							System.out.println("Invalid upload! Check your matrix.");
 						} else {
 							System.out.println("First matrix succesfully uploaded");
 							printMatrix(matrix1);
@@ -115,7 +114,6 @@ public class Endpoints {
 						if (rows < 1 || columns < 1 || rows != columns || isPowerOfTwo(rows) == false
 								|| isPowerOfTwo(columns) == false) {
 							redirectAttributes.addFlashAttribute("message", "Invalid upload! Check your matrix.");
-							System.out.println("Invalid upload! Check your matrix.");
 						} else {
 							System.out.println("Second matrix succesfully uploaded");
 							printMatrix(matrix2);
@@ -143,31 +141,32 @@ public class Endpoints {
 
 	@GetMapping("/simpleMult")
 	public String simpleMult(HttpServletRequest request, Model uiModel, RedirectAttributes redirectAttributes) {
-		int[][] result = GRPCClientService.multiplyMatrix(matrix1, matrix2, Double.MAX_VALUE);
-		// System.out.println("Simple multiplication");
-		redirectAttributes.addAttribute("result is ", result);
-		// System.out.println("result is " + result);
-		return "result is " + result;
+		if (firstMatrixUploaded && secondMatrixUploaded) {
+			int[][] result = GRPCClientService.multiplyMatrix(matrix1, matrix2, Double.MAX_VALUE);
+			// System.out.println("Simple multiplication");
+			redirectAttributes.addAttribute("result is ", result);
+			// System.out.println("result is " + result);
+			return "result is " + result;
+		} else {
+			redirectAttributes.addFlashAttribute("message",
+					"You need to upload both  matrices first, and they need to be valid (i.e. a power of 2)!");
+			return "Error message: You need to upload both  matrices first, and they need to be valid (i.e. a power of 2)!";
+		}
 	}
 
 	@GetMapping("/deadlineMult")
 	public String deadlineMult(HttpServletRequest request, Model uiModel, RedirectAttributes redirectAttributes) {
-		int[][] result = GRPCClientService.multiplyMatrix(matrix1, matrix2, deadline);
-		// System.out.println("Simple multiplication");
-		redirectAttributes.addAttribute("Result is ", result);
-		// System.out.println("result is " + result);
-		return "result is " + result;
-	}
-
-	@RequestMapping(value = "/main", method = RequestMethod.POST, params = "deadlineMult")
-	public String deadlineMult(@RequestParam("deadline") String seconds, HttpServletRequest request, Model uiModel,
-			RedirectAttributes redirectAttributes) {
-		Double secondsDouble = Double.valueOf(seconds);
-		int[][] result = GRPCClientService.multiplyMatrix(matrix1, matrix2, secondsDouble);
-		redirectAttributes.addAttribute("result", result);
-		System.out.println(seconds);
-		System.out.println("Deadline multiplication");
-		return "redirect:/result/{result}";
+		if (firstMatrixUploaded && secondMatrixUploaded) {
+			int[][] result = GRPCClientService.multiplyMatrix(matrix1, matrix2, deadline);
+			// System.out.println("Simple multiplication");
+			redirectAttributes.addAttribute("Result is ", result);
+			// System.out.println("result is " + result);
+			return "result is " + result;
+		} else {
+			redirectAttributes.addFlashAttribute("message",
+					"You need to upload both  matrices first, and they need to be valid (i.e. a power of 2)!");
+			return "Error message: You need to upload both  matrices first, and they need to be valid (i.e. a power of 2)!";
+		}
 	}
 
 	public static int[][] arrayFromFile(MultipartFile file) {
