@@ -25,12 +25,12 @@ public class GRPCClientService {
 	static int[][] multiplyMatrix(int A[][], int B[][], double deadline) {
 		printMatrix(A);
 		ArrayList<int[][]> blockA = splitInBlocks(A);
-		System.out.println("Split block A succesfully");
-		System.out.println(blockA.toString());
+		// System.out.println("Split block A succesfully");
+		// System.out.println(blockA.toString());
 		printMatrix(B);
 		ArrayList<int[][]> blockB = splitInBlocks(B);
-		System.out.println("Split block B succesfully");
-		System.out.println(blockA.toString());
+		// System.out.println("Split block B succesfully");
+		// System.out.println(blockA.toString());
 		System.out.println("Getting result");
 		ArrayList<MatrixResponse> blocks = getResult(blockA, blockB, deadline);
 		System.out.println("Got result");
@@ -56,21 +56,21 @@ public class GRPCClientService {
 		// we only use what we need
 		stubs = getServers();
 		System.out.println("Running loop");
-		System.out.println("A length: " + length);
+		// System.out.println("A length: " + length);
 		for (int i = 0; i < A.length; i++) {
-			System.out.println("Inside first loop");
+			// System.out.println("Inside first loop");
 			for (int j = 0; j < A.length; j++) {
-				System.out.println("Inside second loop");
+				// System.out.println("Inside second loop");
 				for (int k = 0; k < A.length; k++) {
-					System.out.println("Inside third loop");
-					System.out.println("Starting to input matrix");
+					// System.out.println("Inside third loop");
+					// System.out.println("Starting to input matrix");
 					Matrix A1 = A[i][k];
-					System.out.println("Matrix A1:");
-					printMatrixObject(A1);
+					// System.out.println("Matrix A1:");
+					// printMatrixObject(A1);
 					Matrix A2 = B[k][j];
-					System.out.println("Matrix A2:");
-					printMatrixObject(A2);
-					System.out.println("Input matrix succesfully");
+					// System.out.println("Matrix A2:");
+					// printMatrixObject(A2);
+					// System.out.println("Input matrix succesfully");
 					if (i == 0 && j == 0 && k == 0) {
 						System.out.println("Getting deadline");
 						serversNeeded = getDeadline(A1, A2, blocks, stubs.get(currentServer), (blockA.size() * blockA.size()),
@@ -134,12 +134,12 @@ public class GRPCClientService {
 	}
 
 	static ArrayList<int[][]> splitInBlocks(int[][] matrixToBeSplit) {
-		System.out.println("Splitting matrix in blocks, matrix to be split:");
+		System.out.println("Splitting matrix in blocks");
 		ArrayList<int[][]> tempArray = new ArrayList<>();
-		printMatrix(matrixToBeSplit);
+		// printMatrix(matrixToBeSplit);
 		int x = 2;
 		int y = matrixToBeSplit.length;
-		System.out.println("Matrix length: " + y);
+		// System.out.println("Matrix length: " + y);
 		// here we loop through the first element of each column in the 2x2 block, and
 		// we add 2 to i because we will move 2 columns to the right
 		for (int i = 0; i < y - x + 1; i += 2) {
@@ -178,8 +178,8 @@ public class GRPCClientService {
 						}
 					}
 				}
-				System.out.println("Temporary Block:");
-				printMatrix(tempBlock);
+				// System.out.println("Temporary Block:");
+				// printMatrix(tempBlock);
 				tempArray.add(tempBlock); // add the 2x2 blocks to tempArray
 			}
 		}
@@ -225,17 +225,17 @@ public class GRPCClientService {
 	}
 
 	static Matrix[][] create2DBlocks(ArrayList<int[][]> block) {
-		System.out.println(block.toString());
+		// System.out.println(block.toString());
 		int sqr = (int) (Math.sqrt(Double.parseDouble("" + block.size())));
-		System.out.println("SQR IN 2DBLOCKS IS: " + sqr);
+		// System.out.println("SQR IN 2DBLOCKS IS: " + sqr);
 		Matrix C[][] = new Matrix[sqr][sqr];
 		int index = 0;
 		for (int i = 0; i < sqr; i++) {
-			System.out.println("Entered first for loop 2DBlocks");
-			System.out.println(Arrays.deepToString(block.get(i)));
+			// System.out.println("Entered first for loop 2DBlocks");
+			// System.out.println(Arrays.deepToString(block.get(i)));
 			Arrays.deepToString(block.get(i));
 			for (int j = 0; j < sqr; j++) {
-				System.out.println("Entered second for loop 2DBlocks");
+				// System.out.println("Entered second for loop 2DBlocks");
 				C[i][j] = makeBlockFromArray(block.get(index));
 				printMatrixObject(C[i][j]);
 				index++;
@@ -279,7 +279,7 @@ public class GRPCClientService {
 		System.out.println("Ran multiplyBlock sucessfully");
 		double endTime = System.currentTimeMillis();
 		double footprint = endTime - startTime;
-		System.out.println("Footprint is " + footprint);
+		System.out.println("Footprint is " + (int) footprint);
 		double totalTime = (numberOfBlocks - 1) * footprint;
 		double newDeadline = deadlineMilis - footprint;
 		int serversNeeded = (int) (totalTime / newDeadline);
