@@ -209,9 +209,11 @@ public class GRPCClientService {
 		Matrix C[][] = new Matrix[sqr][sqr];
 		int index = 0;
 		for (int i = 0; i < sqr; i++) {
+			System.out.println(Arrays.deepToString(block.get(i)));
 			Arrays.deepToString(block.get(i));
 			for (int j = 0; j < sqr; j++) {
 				C[i][j] = makeBlockFromArray(block.get(index));
+				System.out.println(C[i][j]);
 				index++;
 			}
 		}
