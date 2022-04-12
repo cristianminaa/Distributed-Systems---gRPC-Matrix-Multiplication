@@ -96,7 +96,7 @@ public class Endpoints {
 						if (rows < 1 || columns < 1 || rows != columns || isPowerOfTwo(rows) == false
 								|| isPowerOfTwo(columns) == false) {
 							redirectAttributes.addFlashAttribute("message", "Invalid upload! Check your matrix.");
-							throw Exception(
+							throw new Exception(
 									"Invalid upload! Check your matrix. Make sure it is a square matrix that is a power of 2.");
 						} else {
 							System.out.println("First matrix succesfully uploaded");
@@ -116,7 +116,7 @@ public class Endpoints {
 						if (rows < 1 || columns < 1 || rows != columns || isPowerOfTwo(rows) == false
 								|| isPowerOfTwo(columns) == false) {
 							redirectAttributes.addFlashAttribute("message", "Invalid upload! Check your matrix.");
-							throw Exception(
+							throw new Exception(
 									"Invalid upload! Check your matrix. Make sure it is a square matrix that is a power of 2.");
 						} else {
 							System.out.println("Second matrix succesfully uploaded");
@@ -129,7 +129,7 @@ public class Endpoints {
 				// we are catching exceptions here in case of any unforeseen errors
 			} catch (Exception e) {
 				redirectAttributes.addFlashAttribute("message", "Invalid upload! Check your matrix.");
-				throw Exception("Invalid upload! Check your matrix. Make sure it is a square matrix that is a power of 2.");
+				throw new Exception("Invalid upload! Check your matrix. Make sure it is a square matrix that is a power of 2.");
 			}
 		}
 		if (firstMatrixUploaded || secondMatrixUploaded) {
