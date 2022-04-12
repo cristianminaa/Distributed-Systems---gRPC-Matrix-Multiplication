@@ -37,6 +37,7 @@ public class GRPCClientService {
 		System.out.println("Assembling matrix");
 		int[][] result = assembleMatrix(blocks, A.length, A[0].length);
 		System.out.println("Assembled matrix succesfully");
+		System.out.println("Result:");
 		printMatrix(result);
 		return result;
 	}
@@ -281,7 +282,9 @@ public class GRPCClientService {
 		double footprint = endTime - startTime;
 		System.out.println("Footprint is " + (int) footprint);
 		double totalTime = (numberOfBlocks - 1) * footprint;
+		System.out.println("Total time is " + (int) totalTime);
 		double newDeadline = deadlineMilis - footprint;
+		System.out.println("New deadline is " + (int) newDeadline);
 		int serversNeeded = (int) (totalTime / newDeadline);
 
 		System.out.println("Elapsed time for 1 block: " + footprint);
@@ -291,11 +294,9 @@ public class GRPCClientService {
 		if (serversNeeded > 8) {
 			serversNeeded = 8;
 			System.out.println("Number of needed servers exceeds 8, setting to maximum of 8 servers");
-			System.out.println();
 		} else if (serversNeeded <= 1) {
 			serversNeeded = 1;
 			System.out.println("Number of needed servers is less than 1, setting to 1 server");
-			System.out.println();
 		}
 		System.out.println("The number of needed servers is " + serversNeeded);
 		return serversNeeded;
