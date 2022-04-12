@@ -133,9 +133,9 @@ public class GRPCClientService {
 		return matrix;
 	}
 
-	static ArrayList<int[][]> splitInBlocks(int matrix[][]) {
+	static ArrayList<int[][]> splitInBlocks(int[][] matrix) {
 		ArrayList<int[][]> tempArray = new ArrayList<>();
-
+		System.out.println(matrix.toString());
 		int x = 2;
 		int y = matrix.length;
 		// here we loop through the first element of each column in the 2x2 block, and
