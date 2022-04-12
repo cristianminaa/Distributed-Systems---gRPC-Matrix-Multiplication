@@ -44,7 +44,9 @@ public class GRPCClientService {
 		ArrayList<MatrixServiceBlockingStub> stubs = null;
 
 		Matrix A[][] = create2DBlocks(blockA);
+		System.out.println(A);
 		Matrix B[][] = create2DBlocks(blockB);
+		System.out.println(B);
 
 		int serversNeeded = 1;
 		int currentServer = 0;
@@ -63,9 +65,8 @@ public class GRPCClientService {
 						System.out.println("Getting deadline");
 						serversNeeded = getDeadline(A1, A2, blocks, stubs.get(currentServer), (blockA.size() * blockA.size()),
 								deadline);
-						continue;
 					}
-					System.out.println("Multiplying Blocks");
+					System.out.println("Multiplying blocks");
 					MatrixResponse C = stubs.get(currentServer).multiplyBlock(requestFromMatrix(A1, A2));
 					currentServer++;
 					if (currentServer == serversNeeded) {

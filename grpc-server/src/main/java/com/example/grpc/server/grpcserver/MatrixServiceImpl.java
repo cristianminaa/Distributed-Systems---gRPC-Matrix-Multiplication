@@ -74,7 +74,7 @@ public class MatrixServiceImpl extends MatrixServiceGrpc.MatrixServiceImplBase {
 		MatrixResponse response = MatrixResponse.newBuilder()
 				.setC(arrayToMatrix(newMatrix))
 				.build();
-		System.out.println(response);
+		System.out.println("Response matrix is: \n" + response);
 		reply.onNext(response);
 		reply.onCompleted();
 	}
