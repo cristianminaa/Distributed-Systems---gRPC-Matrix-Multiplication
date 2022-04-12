@@ -2,9 +2,14 @@ package com.example.grpc.server.grpcserver;
 
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
+import com.example.grpc.server.grpcserver.MatrixRequest;
+import com.example.grpc.server.grpcserver.Matrix;
+import com.example.grpc.server.grpcserver.MatrixResponse;
+import com.example.grpc.server.grpcserver.MatrixServiceGrpc;
+import com.example.grpc.server.grpcserver.MatrixServiceGrpc.MatrixServiceBlockingStub;
 
 @GrpcService
-public class MatrixServiceImpl extends MatrixServiceGrpc.MatrixServiceImplBase {
+public class MatrixServiceImpl extends MatrixServiceImplBase {
 
 	private static final int MAX = 4;
 
