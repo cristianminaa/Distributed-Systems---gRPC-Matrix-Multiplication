@@ -44,9 +44,9 @@ public class GRPCClientService {
 		ArrayList<MatrixServiceBlockingStub> stubs = null;
 
 		Matrix A[][] = create2DBlocks(blockA);
-		printMatrix(A);
+		printMatrix(blockA);
 		Matrix B[][] = create2DBlocks(blockB);
-		printMatrix(B);
+		printMatrix(blockB);
 
 		int serversNeeded = 1;
 		int currentServer = 0;
@@ -59,7 +59,11 @@ public class GRPCClientService {
 				for (int k = 0; k < A.length; k++) {
 					System.out.println("Starting to input matrix");
 					Matrix A1 = A[i][k];
+					System.out.println("Matrix A1:");
+					printMatrixObject(A1);
 					Matrix A2 = B[k][j];
+					System.out.println("Matrix A2:");
+					printMatrixObject(A2);
 					System.out.println("Input matrix succesfully");
 					if (i == 0 && j == 0 && k == 0) {
 						System.out.println("Getting deadline");
@@ -193,6 +197,13 @@ public class GRPCClientService {
 				.setC11(array[1][1])
 				.build();
 		return C;
+	}
+
+	public static void printMatrixObject(Matrix matrix) {
+		System.out.println("C00: " + matrix.getC00());
+		System.out.println("C01: " + matrix.getC01());
+		System.out.println("C10: " + matrix.getC10());
+		System.out.println("C11: " + matrix.getC11());
 	}
 
 	static Matrix[][] create2DBlocks(ArrayList<int[][]> block) {
