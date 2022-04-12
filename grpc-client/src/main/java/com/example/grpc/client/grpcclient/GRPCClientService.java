@@ -267,12 +267,12 @@ public class GRPCClientService {
 
 	static int getDeadline(Matrix A1, Matrix A2, ArrayList<MatrixResponse> responses, MatrixServiceBlockingStub stub,
 			int numberOfBlocks, double deadline) {
-		System.out.println("Matrix A1:");
+		// System.out.println("Matrix A1:");
 		// printMatrixObject(A1);
-		System.out.println("Matrix A2:");
+		// System.out.println("Matrix A2:");
 		// printMatrixObject(A2);
 		System.out.println("Starting to get deadline");
-		int deadlineMilis = (int) (deadline * 1000);
+		// int deadlineMilis = (int) (deadline * 1000);
 		double startTime = System.currentTimeMillis();
 		System.out.println("Start time: " + startTime + ", running multiplyBlock");
 		MatrixResponse temp = stub.multiplyBlock(requestFromMatrix(A1, A2));
@@ -283,7 +283,7 @@ public class GRPCClientService {
 		System.out.println("Footprint is " + (int) footprint);
 		double totalTime = (numberOfBlocks - 1) * footprint;
 		System.out.println("Total time is " + (int) totalTime);
-		double newDeadline = deadlineMilis - footprint;
+		double newDeadline = (int) deadlineMilis - footprint;
 		System.out.println("New deadline is " + (int) newDeadline);
 		int serversNeeded = (int) (totalTime / newDeadline);
 
