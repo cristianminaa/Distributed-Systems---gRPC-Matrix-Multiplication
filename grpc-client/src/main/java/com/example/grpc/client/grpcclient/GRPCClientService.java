@@ -242,7 +242,6 @@ public class GRPCClientService {
 		double totalTime = (numberOfBlocks - 1) * footprint;
 		double newDeadline = deadlineMilis - footprint;
 		int serversNeeded = (int) (totalTime / newDeadline);
-		System.out.println("Servers needed " + serversNeeded);
 
 		System.out.println("Elapsed time for 1 block: " + footprint);
 		System.out.println("Total elapsed time: " + totalTime);
