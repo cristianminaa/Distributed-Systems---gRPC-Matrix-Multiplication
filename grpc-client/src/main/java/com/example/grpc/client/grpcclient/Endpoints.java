@@ -146,6 +146,15 @@ public class Endpoints {
 		return "result is " + result;
 	}
 
+	@GetMapping("/deadlineMult")
+	public String deadlineMult(HttpServletRequest request, Model uiModel, RedirectAttributes redirectAttributes) {
+		int[][] result = GRPCClientService.multiplyMatrix(matrix1, matrix2, deadline);
+		// System.out.println("Simple multiplication");
+		redirectAttributes.addAttribute("Result is ", result);
+		// System.out.println("result is " + result);
+		return "result is " + result;
+	}
+
 	@RequestMapping(value = "/main", method = RequestMethod.POST, params = "deadlineMult")
 	public String deadlineMult(@RequestParam("deadline") String seconds, HttpServletRequest request, Model uiModel,
 			RedirectAttributes redirectAttributes) {
