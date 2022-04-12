@@ -110,8 +110,8 @@ public class Endpoints {
 					} else {
 						int rows = matrix2.length;
 						int columns = matrix2[0].length;
-						if (rows < 1 || columns < 1 || rows != columns || !isPowerOfTwo(rows) || !isPowerOfTwo(columns)
-								|| rows != matrix2.length || columns != matrix2[0].length) {
+						if (rows < 1 || columns < 1 || rows != columns || isPowerOfTwo(rows) == false
+								|| isPowerOfTwo(columns) == false || rows != matrix2.length || columns != matrix2[0].length) {
 							redirectAttributes.addFlashAttribute("message", "Invalid upload! Check your matrix.");
 						} else {
 							System.out.println("Second matrix succesfully uploaded");
