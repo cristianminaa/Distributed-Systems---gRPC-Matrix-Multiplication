@@ -142,10 +142,10 @@ public class GRPCClientService {
 		System.out.println("Matrix length: " + y);
 		// here we loop through the first element of each column in the 2x2 block, and
 		// we add 2 to i because we will move 2 columns to the right
-		for (int i = 0; i < x - y + 1; i += 2) {
+		for (int i = 0; i < y - x + 1; i += 2) {
 			// here we loop through the row of each block, and we add 2 to j because we will
 			// move 2 positions down the row
-			for (int j = 0; j < x - y + 1; j += 2) {
+			for (int j = 0; j < y - x + 1; j += 2) {
 				boolean[][] assigned = new boolean[x][x];
 				int[][] tempBlock = new int[x][x];
 				// we fill the tempBlock 2x2 block with values from matrix
