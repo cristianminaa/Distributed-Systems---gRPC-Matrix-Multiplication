@@ -44,8 +44,6 @@ public class GRPCClientService {
 		ArrayList<MatrixResponse> blocks = new ArrayList<>();
 		ArrayList<MatrixServiceBlockingStub> stubs = null;
 
-		System.out.println(blockA.toArray());
-		System.out.println(blockB.toArray());
 		Matrix A[][] = create2DBlocks(blockA);
 		Matrix B[][] = create2DBlocks(blockB);
 
@@ -56,8 +54,11 @@ public class GRPCClientService {
 		stubs = getServers();
 		System.out.println("Running loop");
 		for (int i = 0; i < A.length; i++) {
+			System.out.println("Inside first loop");
 			for (int j = 0; j < A.length; j++) {
+				System.out.println("Inside second loop");
 				for (int k = 0; k < A.length; k++) {
+					System.out.println("Inside third loop");
 					System.out.println("Starting to input matrix");
 					Matrix A1 = A[i][k];
 					System.out.println("Matrix A1:");
