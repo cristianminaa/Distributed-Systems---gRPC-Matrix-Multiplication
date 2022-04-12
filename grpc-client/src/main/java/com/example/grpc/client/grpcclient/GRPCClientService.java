@@ -130,18 +130,21 @@ public class GRPCClientService {
 
 	static ArrayList<int[][]> splitInBlocks(int matrix[][]) {
 		ArrayList<int[][]> tempArray = new ArrayList<>();
+
+		int x = 2;
+		int y = matrix.length;
 		// here we loop through the first element of each column in the 2x2 block, and
 		// we add 2 to i because we will move 2 columns to the right
-		for (int i = 0; i < matrix.length - 3; i += 2) {
+		for (int i = 0; i < x - y + 1; i += 2) {
 			// here we loop through the row of each block, and we add 2 to j because we will
 			// move 2 positions down the row
-			for (int j = 0; j < matrix.length - 3; j += 2) {
-				boolean[][] assigned = new boolean[2][2];
-				int tempBlock[][] = new int[2][2];
+			for (int j = 0; j < x - y + 1; j += 2) {
+				boolean[][] assigned = new boolean[x][x];
+				int tempBlock[][] = new int[x][x];
 				// we fill the tempBlock 2x2 block with values from matrix
-				for (int p = i; p < i + 2; p++) {
+				for (int p = i; p < x + i; p++) {
 					int step = 0;
-					for (int q = j; q < j + 2; q++) {
+					for (int q = j; q < x + j; q++) {
 						if (step == 0 && !assigned[0][0]) {
 							tempBlock[0][0] = matrix[p][q];
 							assigned[0][0] = true;
