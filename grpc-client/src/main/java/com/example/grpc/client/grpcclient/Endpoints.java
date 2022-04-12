@@ -204,16 +204,16 @@ public class Endpoints {
 		return result;
 	}
 
-	private static boolean isPowerOfTwo(int number) {
-		try {
-			if (number > 0 && ((number & (number - 1)) == 0)) {
-				return number > 0 && ((number & (number - 1)) == 0);
-			}
-		} catch (Exception e) {
-			System.out.println("The matrix size is not a power of two!");
+	static boolean isPowerOfTwo(int n) { // https://www.geeksforgeeks.org/java-program-to-find-whether-a-no-is-power-of-two/
+		if (n == 0)
 			return false;
+
+		while (n != 1) {
+			if (n % 2 != 0)
+				return false;
+			n = n / 2;
 		}
-		return number > 0 && ((number & (number - 1)) == 0);
+		return true;
 	}
 
 	private static void printMatrix(int[][] matrix) {
