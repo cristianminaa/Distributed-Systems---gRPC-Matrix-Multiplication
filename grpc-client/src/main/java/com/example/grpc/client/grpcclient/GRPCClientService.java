@@ -136,33 +136,40 @@ public class GRPCClientService {
 			// here we loop through the row of each block, and we add 2 to j because we will
 			// move 2 positions down the row
 			for (int j = 0; j < matrix.length - 3; j += 2) {
+				boolean[][] assigned = new boolean[2][2];
 				int tempBlock[][] = new int[2][2];
 				// we fill the tempBlock 2x2 block with values from matrix
 				for (int p = i; p < i + 2; p++) {
 					int step = 0;
 					for (int q = j; q < j + 2; q++) {
-						if (step == 0) {
+						if (step == 0 && !assigned[0][0]) {
 							tempBlock[0][0] = matrix[p][q];
-							step += 1;
+							assigned[0][0] = true;
+							step++;
 							continue;
 						}
-						if (step == 1) {
+						if (step == 1 && !assigned[0][1]) {
 							tempBlock[1][0] = matrix[p][q];
-							step += 1;
+							assigned[0][1] = true;
+							step++;
 							continue;
 						}
-						if (step == 2) {
+						if (step == 2 && !assigned[1][0]) {
 							tempBlock[0][1] = matrix[p][q];
-							step += 1;
+							assigned[1][0] = true;
+							step++;
 							continue;
 						}
-						if (step == 3) {
+						if (step == 3 && !assigned[1][1]) {
 							tempBlock[1][1] = matrix[p][q];
-							step += 1;
+							assigned[1][1] = true;
+							step++;
 							continue;
 						}
 					}
 				}
+				System.out.println("Temporary Block:");
+				printMatrix(tempBlock);
 				tempArray.add(tempBlock); // add the 2x2 blocks to tempArray
 			}
 		}
