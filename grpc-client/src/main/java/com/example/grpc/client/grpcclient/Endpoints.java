@@ -154,6 +154,7 @@ public class Endpoints {
 		} else {
 			redirectAttributes.addFlashAttribute("message",
 					"You need to upload both  matrices first, and they need to be valid (i.e. a power of 2)!");
+					System.out.println("You need to upload both  matrices first, and they need to be valid (i.e. a power of 2)!");
 			return "Error message: You need to upload both  matrices first, and they need to be valid (i.e. a power of 2)!";
 		}
 	}
